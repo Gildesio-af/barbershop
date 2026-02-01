@@ -1,3 +1,37 @@
 spring:
   application:
     name: Barbershop API
+
+  threads:
+    virtual:
+      enabled: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/barbershop?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: barbeiro_admin
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      max-lifetime: 1800000
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+logging:
+  level:
+    root: INFO
+    com.barbearia: DEBUG

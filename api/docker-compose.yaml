@@ -1,0 +1,73 @@
+services:
+  # --- API SPRING BOOT ---
+  barbershop-api:
+    container_name: barbershop_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    environment:
+      # Conexão MySQL
+      SPRING_DATASOURCE_URL: jdbc:mysql://barbershop_db:3306/${MYSQL_DATABASE}?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
+
+      # Perfil do Spring
+      SPRING_PROFILES_ACTIVE: dev
+    depends_on:
+      barbershop_db:
+        condition: service_healthy
+      barbershop_redis:
+        condition: service_healthy
+    networks:
+      - barbershop-network
+
+  # --- BANCO DE DADOS (MySQL 8) ---
+  barbershop_db:
+    container_name: barbershop_db
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - '3307:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - barbershop-network
+    # Healthcheck específico para MySQL
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # --- CACHE (Redis) ---
+  barbershop_redis:
+    container_name: barbershop_redis
+    image: redis:alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    networks:
+      - barbershop-network
+    # Healthcheck para garantir que o Redis subiu
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+# Volumes para persistir dados mesmo se apagar os containers
+volumes:
+  mysql_data:
+
+# Rede interna para os containers conversarem
+networks:
+  barbershop-network:
+    driver: bridge
