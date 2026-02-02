@@ -1,11 +1,11 @@
 CREATE TABLE IF NOT EXISTS roles(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    user_role VARCHAR(20)
+    user_role VARCHAR(20) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS barbershop_user(
-  id CHAR(36) PRIMARY KEY,
-    username VARCHAR(100) NOT NULL,
+    id CHAR(36) PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
     user_password VARCHAR(255),
     email VARCHAR(100) NOT NULL UNIQUE,
     phone_number VARCHAR(20),
