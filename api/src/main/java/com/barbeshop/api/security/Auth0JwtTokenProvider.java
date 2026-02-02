@@ -8,7 +8,6 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -33,10 +32,13 @@ public class Auth0JwtTokenProvider {
     }
 
     public String generateToken(Authentication authentication) {
-        if (!(authentication.getPrincipal() instanceof UserDetails userDetails)) {
-            throw new InvalidAuthenticationException("Principal is not an instance of UserDetails");
+        if (!(authentication.getPrincipal() instanceof CustomUserDetails userDetails)) {
+            throw new InvalidAuthenticationException("Principal is not an instance of CustomUserDetails");
         }
+        return generateToken(userDetails);
+    }
 
+    public String generateToken(CustomUserDetails userDetails) {
         Instant now = Instant.now();
         Instant expiryDate = now.plusMillis(jwtExpirationInMs);
 
@@ -51,10 +53,8 @@ public class Auth0JwtTokenProvider {
                 .withExpiresAt(expiryDate)
                 .withClaim("roles", roles);
 
-        if (userDetails instanceof CustomUserDetails customUserDetails) {
-            if (customUserDetails.getId() != null) {
-                jwtBuilder.withClaim("id", customUserDetails.getId());
-            }
+        if (userDetails.getId() != null) {
+            jwtBuilder.withClaim("id", userDetails.getId());
         }
 
         return jwtBuilder.sign(algorithm);

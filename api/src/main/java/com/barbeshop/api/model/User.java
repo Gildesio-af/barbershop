@@ -29,7 +29,7 @@ public class User {
     private Integer loyaltyPoints;
     private LocalDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 }

@@ -2,6 +2,18 @@ spring:
   application:
     name: Barbershop API
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+
   threads:
     virtual:
       enabled: true
@@ -30,6 +42,11 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true
+
+app:
+  jwtSecret: ${APP_JWTSECRET:UmaSenhaMuitoLongaEMuitoSeguraParaOAlgoritmoFuncionarCorretamente123456}
+  jwtExpirationInMs: 86400000
+  frontend-url: http://localhost:3000
 
 logging:
   level:

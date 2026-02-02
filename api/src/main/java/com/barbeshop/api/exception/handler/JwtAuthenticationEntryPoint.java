@@ -31,7 +31,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         }
         else if (authException instanceof BadCredentialsException) {
             errorTitle = "Bad Credentials";
-            message = "Username or password is incorrect.";
+            message = "Username or password is incorrect or authentication method is wrong.";
         }
         else if (authException instanceof InsufficientAuthenticationException) {
             errorTitle = "Access Denied";

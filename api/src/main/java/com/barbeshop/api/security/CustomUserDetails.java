@@ -1,5 +1,6 @@
 package com.barbeshop.api.security;
 
+import com.barbeshop.api.model.enums.AuthProvider;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,6 +22,8 @@ public class CustomUserDetails implements UserDetails {
     private String password;
     private String email;
     private String authorities;
+    private AuthProvider authProvider;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + authorities));
