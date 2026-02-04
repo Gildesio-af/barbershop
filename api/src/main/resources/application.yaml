@@ -43,6 +43,18 @@ spring:
     enabled: true
     baseline-on-migrate: true
 
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: ${MAILTRAP_USERNAME}
+    password: ${MAILTRAP_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 app:
   jwtSecret: ${APP_JWTSECRET:UmaSenhaMuitoLongaEMuitoSeguraParaOAlgoritmoFuncionarCorretamente123456}
   jwtExpirationInMs: 86400000
