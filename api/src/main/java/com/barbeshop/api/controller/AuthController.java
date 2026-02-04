@@ -1,7 +1,9 @@
 package com.barbeshop.api.controller;
 
+import com.barbeshop.api.dto.security.EmailRequestDTO;
 import com.barbeshop.api.dto.security.JwtResponse;
 import com.barbeshop.api.dto.security.LoginRequest;
+import com.barbeshop.api.dto.security.PasswordRequestDTO;
 import com.barbeshop.api.dto.user.AuthService;
 import com.barbeshop.api.security.Auth0JwtTokenProvider;
 import com.barbeshop.api.security.CustomUserDetails;
@@ -48,16 +50,14 @@ public class AuthController {
     }
 
     @PostMapping("/recover-password")
-    public ResponseEntity<String> recoverPassword(@RequestBody Map<String, String> request) {
-        String email = request.get("email");
-        authService.recoverPassword(email);
+    public ResponseEntity<String> recoverPassword(@Valid @RequestBody EmailRequestDTO emailRequest) {
+        authService.recoverPassword(emailRequest);
         return ResponseEntity.ok("Password recovery email sent if the email exists in our system.");
     }
 
     @PatchMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestParam String token, @RequestBody Map<String, String> request) {
-        String newPassword = request.get("newPassword");
-        authService.resetPassword(token, newPassword);
+    public ResponseEntity<String> resetPassword(@RequestParam String token, @Valid @RequestBody PasswordRequestDTO request) {
+        authService.resetPassword(token, request);
         return ResponseEntity.ok("Password has been reset successfully.");
     }
 }

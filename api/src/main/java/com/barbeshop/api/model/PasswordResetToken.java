@@ -23,7 +23,7 @@ public class PasswordResetToken {
     private LocalDateTime expiresAt;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "id", nullable = false)
     private User user;
 
     public PasswordResetToken(User user, String token) {

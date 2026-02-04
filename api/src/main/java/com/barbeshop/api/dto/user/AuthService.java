@@ -1,5 +1,7 @@
 package com.barbeshop.api.dto.user;
 
+import com.barbeshop.api.dto.security.EmailRequestDTO;
+import com.barbeshop.api.dto.security.PasswordRequestDTO;
 import com.barbeshop.api.model.PasswordResetToken;
 import com.barbeshop.api.model.User;
 import com.barbeshop.api.repository.PasswordTokenRepository;
@@ -23,8 +25,8 @@ public class AuthService {
     private final EmailService emailService;
     private final PasswordEncoder encoder;
 
-    public void recoverPassword(String email) {
-        Optional<User> optionalUser = userRepository.findByEmail(email);
+    public void recoverPassword(EmailRequestDTO emailRequest) {
+        Optional<User> optionalUser = userRepository.findByEmail(emailRequest.email());
         if (optionalUser.isEmpty()) return;
 
         User user = optionalUser.get();
@@ -36,10 +38,10 @@ public class AuthService {
 
         String link = "http://localhost:8080/auth/reset-password?token=" + token.getToken();
 
-        emailService.sendRecoveryEmail(email, user.getUsername(), link);
+        emailService.sendRecoveryEmail(emailRequest.email(), user.getUsername(), link);
     }
 
-    public void resetPassword(String token, String newPassword) {
+    public void resetPassword(String token, PasswordRequestDTO newPasswordRequest) {
         PasswordResetToken resetToken = passwordRepository.findByToken(token)
                 .orElseThrow(() -> new EntityNotFoundException("Password Reset Token", token));
 
@@ -50,7 +52,7 @@ public class AuthService {
         User user = userRepository.findById(resetToken.getUser().getId())
                 .orElseThrow(() -> new EntityNotFoundException("User", resetToken.getUser().getId()));
 
-        user.setPassword(encoder.encode(newPassword));
+        user.setPassword(encoder.encode(newPasswordRequest.password()));
         userRepository.save(user);
 
         passwordRepository.delete(resetToken);
