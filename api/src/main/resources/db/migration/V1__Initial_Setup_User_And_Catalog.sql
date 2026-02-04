@@ -16,10 +16,18 @@ CREATE TABLE IF NOT EXISTS barbershop_user(
     CONSTRAINT fk_bu_role FOREIGN KEY (role_id) REFERENCES roles(id) ON UPDATE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS password_reset_token(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id CHAR(36) NOT NULL,
+    token VARCHAR(100) NOT NULL,
+    expires_at DATETIME NOT NULL,
+    CONSTRAINT fk_prt_user FOREIGN KEY (user_id) REFERENCES barbershop_user(id) ON DELETE CASCADE
+);
+
 -- CONFIGURAÇÃO DA LOJA E HORÁRIOS
 CREATE TABLE IF NOT EXISTS store_settings(
-     id INT PRIMARY KEY AUTO_INCREMENT,
-     store_name VARCHAR(100) NOT NULL,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    store_name VARCHAR(100) NOT NULL,
     address VARCHAR(150),
     phone VARCHAR(20),
     instagram_handle VARCHAR(50),
@@ -27,10 +35,10 @@ CREATE TABLE IF NOT EXISTS store_settings(
 );
 
 CREATE TABLE IF NOT EXISTS business_hours(
-     id INT PRIMARY KEY AUTO_INCREMENT,
-     settings_id INT NOT NULL,
-     day_of_week TINYINT NOT NULL,
-     is_open TINYINT(1) DEFAULT 1,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    settings_id INT NOT NULL,
+    day_of_week TINYINT NOT NULL,
+    is_open TINYINT(1) DEFAULT 1,
     open_time TIME,
     close_time TIME,
     break_start TIME,

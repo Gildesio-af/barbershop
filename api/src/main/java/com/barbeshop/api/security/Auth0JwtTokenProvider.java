@@ -3,7 +3,7 @@ package com.barbeshop.api.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.barbeshop.api.exception.InvalidAuthenticationException;
+import com.barbeshop.api.shared.exception.InvalidAuthenticationException;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;

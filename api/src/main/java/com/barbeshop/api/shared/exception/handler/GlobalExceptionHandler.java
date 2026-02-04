@@ -1,7 +1,7 @@
-package com.barbeshop.api.exception.handler;
+package com.barbeshop.api.shared.exception.handler;
 
 import com.barbeshop.api.dto.error.CustomError;
-import com.barbeshop.api.exception.ApiException;
+import com.barbeshop.api.shared.exception.ApiException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

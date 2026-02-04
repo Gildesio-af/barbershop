@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -24,12 +25,14 @@ public class User {
     private String password;
     @Column(nullable = false, unique = true, length = 100)
     private String email;
+    @Column(length = 20)
+    private String phoneNumber;
     @Enumerated(EnumType.STRING)
     private AuthProvider authProvider;
     private Integer loyaltyPoints;
     private LocalDateTime createdAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 }

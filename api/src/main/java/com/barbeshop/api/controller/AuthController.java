@@ -1,7 +1,10 @@
 package com.barbeshop.api.controller;
 
+import com.barbeshop.api.dto.security.EmailRequestDTO;
 import com.barbeshop.api.dto.security.JwtResponse;
 import com.barbeshop.api.dto.security.LoginRequest;
+import com.barbeshop.api.dto.security.PasswordRequestDTO;
+import com.barbeshop.api.dto.user.AuthService;
 import com.barbeshop.api.security.Auth0JwtTokenProvider;
 import com.barbeshop.api.security.CustomUserDetails;
 import jakarta.validation.Valid;
@@ -10,11 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.security.authentication.AuthenticationManager;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -22,6 +24,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 public class AuthController {
     private final AuthenticationManager authManager;
     private final Auth0JwtTokenProvider jwtTokenProvider;
+    private final AuthService authService;
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
@@ -44,5 +47,17 @@ public class AuthController {
                 .role(userDetails.getAuthorities().stream().findFirst().orElseThrow().getAuthority())
                 .email(userDetails.getEmail())
                 .build());
+    }
+
+    @PostMapping("/recover-password")
+    public ResponseEntity<String> recoverPassword(@Valid @RequestBody EmailRequestDTO emailRequest) {
+        authService.recoverPassword(emailRequest);
+        return ResponseEntity.ok("Password recovery email sent if the email exists in our system.");
+    }
+
+    @PatchMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestParam String token, @Valid @RequestBody PasswordRequestDTO request) {
+        authService.resetPassword(token, request);
+        return ResponseEntity.ok("Password has been reset successfully.");
     }
 }

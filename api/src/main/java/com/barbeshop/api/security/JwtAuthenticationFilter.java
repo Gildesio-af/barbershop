@@ -1,7 +1,7 @@
 package com.barbeshop.api.security;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.barbeshop.api.exception.handler.JwtAuthenticationEntryPoint;
+import com.barbeshop.api.shared.exception.handler.JwtAuthenticationEntryPoint;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
