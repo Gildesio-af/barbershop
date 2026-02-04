@@ -1,4 +1,4 @@
-package com.barbeshop.api.exception.handler;
+package com.barbeshop.api.shared.exception.handler;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import jakarta.servlet.http.HttpServletRequest;

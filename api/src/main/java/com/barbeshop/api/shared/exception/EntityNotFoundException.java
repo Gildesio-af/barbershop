@@ -1,4 +1,4 @@
-package com.barbeshop.api.exception;
+package com.barbeshop.api.shared.exception;
 
 import org.springframework.http.HttpStatus;
 

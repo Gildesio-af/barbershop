@@ -1,7 +1,8 @@
-package com.barbeshop.api.utils;
+package com.barbeshop.api.shared.utils;
 
 import com.barbeshop.api.dto.user.UserRequestDTO;
 import com.barbeshop.api.dto.user.UserResponseDTO;
+import com.barbeshop.api.dto.user.UserUpdateDTO;
 import com.barbeshop.api.model.Role;
 import com.barbeshop.api.model.User;
 import com.barbeshop.api.model.enums.AuthProvider;
@@ -37,7 +38,7 @@ public class UserConverter {
                 .build();
     }
 
-    public static void updateModelFromRequestDTO(User user, UserRequestDTO userDTO) {
+    public static void updateModelFromRequestDTO(User user, UserUpdateDTO userDTO) {
         if (userDTO.username() != null) user.setUsername(userDTO.username());
         if (userDTO.email() != null) user.setEmail(userDTO.email());
         if (userDTO.phoneNumber() != null) user.setPhoneNumber(userDTO.phoneNumber());

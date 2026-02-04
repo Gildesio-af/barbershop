@@ -1,6 +1,6 @@
 package com.barbeshop.api.config;
 
-import com.barbeshop.api.exception.handler.JwtAuthenticationEntryPoint;
+import com.barbeshop.api.shared.exception.handler.JwtAuthenticationEntryPoint;
 import com.barbeshop.api.security.GoogleLoginSuccessHandler;
 import com.barbeshop.api.security.JwtAuthenticationFilter;
 import com.barbeshop.api.service.CustomUserDetailsService;
@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/library/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/library/v3/api-docs/**","/library/swagger-ui.html/**","/library/swagger-ui/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers("/test/**").permitAll()
                         .anyRequest().permitAll()
                 )
