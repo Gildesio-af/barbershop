@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -30,6 +32,7 @@ public class CategoryService {
                 new CategoryResponseDTO(category.getId(), category.getName()));
     }
 
+    @Transactional
     public CategoryResponseDTO createCategory(String name) {
         var category = new Category();
         category.setName(name);

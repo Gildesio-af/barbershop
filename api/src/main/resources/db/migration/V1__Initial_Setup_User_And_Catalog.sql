@@ -56,13 +56,13 @@ CREATE TABLE IF NOT EXISTS category(
 CREATE TABLE IF NOT EXISTS product(
     id CHAR(36) PRIMARY KEY,
     p_name VARCHAR(50) NOT NULL,
-    category_id CHAR(36),
+    category_id CHAR(36) NOT NULL ,
     quantity INT DEFAULT 0,
     min_stock INT DEFAULT 5,
     price DECIMAL(10,2) NOT NULL,
     image_url VARCHAR(255),
     is_visible TINYINT(1) DEFAULT 1,
-    CONSTRAINT fk_category_product FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL ON UPDATE CASCADE
+    CONSTRAINT fk_category_product FOREIGN KEY (category_id) REFERENCES category(id) ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS service(

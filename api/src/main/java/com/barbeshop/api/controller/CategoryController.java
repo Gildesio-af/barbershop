@@ -3,7 +3,6 @@ package com.barbeshop.api.controller;
 import com.barbeshop.api.dto.category.CategoryResponseDTO;
 import com.barbeshop.api.service.CategoryService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
