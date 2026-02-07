@@ -1,4 +1,4 @@
-package com.barbeshop.api.shared.utils;
+package com.barbeshop.api.shared.utils.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
