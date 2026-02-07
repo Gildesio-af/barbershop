@@ -17,6 +17,6 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     Page<Product> findAllByNameContainingIgnoreCase(String name, Pageable pageable);
 
     @Modifying
-    @Query("UPDATE Product p SET p.isDeleted = true WHERE p.id = :id")
+    @Query("UPDATE Product p SET p.isDeleted = true WHERE p.id = :id AND p.isDeleted = false")
     int softDeleteById(String id);
 }
