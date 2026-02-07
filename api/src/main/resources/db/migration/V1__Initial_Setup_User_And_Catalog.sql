@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS category(
 
 CREATE TABLE IF NOT EXISTS product(
     id CHAR(36) PRIMARY KEY,
-    p_name VARCHAR(50) NOT NULL,
+    p_name VARCHAR(50) NOT NULL UNIQUE,
     category_id CHAR(36) NOT NULL ,
     quantity INT DEFAULT 0,
     min_stock INT DEFAULT 5,
@@ -68,10 +68,11 @@ CREATE TABLE IF NOT EXISTS product(
 
 CREATE TABLE IF NOT EXISTS service(
     id CHAR(36) PRIMARY KEY,
-    s_name VARCHAR(50) NOT NULL,
-    service_category ENUM('HAIR','BEARD', 'EYEBROW', 'OTHERS') NOT NULL,
+    s_name VARCHAR(50) NOT NULL UNIQUE,
+    s_type ENUM('HAIR','BEARD', 'EYEBROW', 'OTHERS') NOT NULL,
     duration INT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     image_url VARCHAR(255),
-    is_visible TINYINT(1) DEFAULT 1
+    is_visible TINYINT(1) DEFAULT 1,
+    is_active TINYINT(1) DEFAULT 0
 );

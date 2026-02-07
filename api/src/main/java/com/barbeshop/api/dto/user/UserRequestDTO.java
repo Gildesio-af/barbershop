@@ -1,6 +1,6 @@
 package com.barbeshop.api.dto.user;
 
-import com.barbeshop.api.shared.utils.Telephone;
+import com.barbeshop.api.shared.utils.validation.Telephone;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
