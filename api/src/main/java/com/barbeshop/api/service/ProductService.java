@@ -66,8 +66,8 @@ public class ProductService {
 
     @Transactional
     public void deleteProductById(String id) {
-        if (!productRepository.existsById(id))
+        int rowsAffected = productRepository.softDeleteById(id);
+        if (rowsAffected == 0)
             throw new EntityNotFoundException("Product", id);
-        productRepository.deleteById(id);
     }
 }

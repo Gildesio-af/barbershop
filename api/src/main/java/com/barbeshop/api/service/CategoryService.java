@@ -1,6 +1,7 @@
 package com.barbeshop.api.service;
 
 import com.barbeshop.api.dto.category.CategoryResponseDTO;
+import com.barbeshop.api.dto.category.CategoryUpdateDTO;
 import com.barbeshop.api.model.Category;
 import com.barbeshop.api.repository.CategoryRepository;
 import com.barbeshop.api.shared.exception.EntityNotFoundException;
@@ -33,12 +34,17 @@ public class CategoryService {
     }
 
     @Transactional
-    public CategoryResponseDTO createCategory(String name) {
-        var category = new Category();
-        category.setName(name);
+    public CategoryResponseDTO updateCategory(String id, CategoryUpdateDTO updateDTO) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Category", id));
 
-        var savedCategory = categoryRepository.save(category);
+        Optional<Category> existingCategory = categoryRepository.findByNameIgnoreCase(updateDTO.name());
+        if (existingCategory.isPresent() && !existingCategory.get().getId().equals(id))
+            throw new IllegalArgumentException("Category name already exists: " + updateDTO.name());
 
-        return new CategoryResponseDTO(savedCategory.getId(), savedCategory.getName());
+        category.setName(updateDTO.name());
+        categoryRepository.save(category);
+
+        return new CategoryResponseDTO(category.getId(), category.getName());
     }
 }

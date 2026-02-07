@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS product(
     price DECIMAL(10,2) NOT NULL,
     image_url VARCHAR(255),
     is_visible TINYINT(1) DEFAULT 1,
+    is_active TINYINT(1) DEFAULT 0,
     CONSTRAINT fk_category_product FOREIGN KEY (category_id) REFERENCES category(id) ON UPDATE CASCADE
 );
 
