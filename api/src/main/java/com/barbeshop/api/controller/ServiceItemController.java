@@ -3,7 +3,6 @@ package com.barbeshop.api.controller;
 import com.barbeshop.api.dto.service.ServiceItemCreateDTO;
 import com.barbeshop.api.dto.service.ServiceItemResponseDTO;
 import com.barbeshop.api.dto.service.ServiceItemUpdateDTO;
-import com.barbeshop.api.model.enums.ServiceType;
 import com.barbeshop.api.service.ServiceItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

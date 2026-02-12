@@ -39,11 +39,11 @@ CREATE TABLE IF NOT EXISTS business_hours(
     settings_id INT NOT NULL,
     day_of_week TINYINT NOT NULL,
     is_open TINYINT(1) DEFAULT 1,
-    open_time TIME,
-    close_time TIME,
+    open_time TIME NOT NULL ,
+    close_time TIME NOT NULL,
     break_start TIME,
     break_end TIME,
-    mode ENUM('APPOINTMENT', 'WALKIN', 'CLOSED') DEFAULT 'APPOINTMENT',
+    mode ENUM('APPOINTMENT', 'WALKIN') DEFAULT 'APPOINTMENT',
     CONSTRAINT fk_bh_settings FOREIGN KEY (settings_id) REFERENCES store_settings(id) ON DELETE CASCADE
 );
 
