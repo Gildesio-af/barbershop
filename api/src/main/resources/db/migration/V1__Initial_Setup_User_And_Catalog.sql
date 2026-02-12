@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS business_hours(
     close_time TIME NOT NULL,
     break_start TIME,
     break_end TIME,
-    mode ENUM('APPOINTMENT', 'WALKIN') DEFAULT 'APPOINTMENT',
+    mode ENUM('APPOINTMENT', 'WALK_IN') DEFAULT 'APPOINTMENT',
     CONSTRAINT fk_bh_settings FOREIGN KEY (settings_id) REFERENCES store_settings(id) ON DELETE CASCADE
 );
 
@@ -76,3 +76,38 @@ CREATE TABLE IF NOT EXISTS service(
     is_visible TINYINT(1) DEFAULT 1,
     is_active TINYINT(1) DEFAULT 0
 );
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS trg_create_default_business_hours$$
+
+CREATE TRIGGER trg_create_default_business_hours
+    AFTER INSERT ON store_settings
+    FOR EACH ROW
+BEGIN
+    INSERT INTO business_hours (
+        settings_id,
+        day_of_week,
+        is_open,
+        open_time,
+        close_time,
+        mode
+    ) VALUES
+          -- 1: Segunda-feira
+          (NEW.id, 1, 1, '07:00:00', '18:00:00', 'APPOINTMENT'),
+          -- 2: Terça-feira
+          (NEW.id, 2, 1, '07:00:00', '18:00:00', 'APPOINTMENT'),
+          -- 3: Quarta-feira
+          (NEW.id, 3, 1, '07:00:00', '18:00:00', 'APPOINTMENT'),
+          -- 4: Quinta-feira
+          (NEW.id, 4, 1, '07:00:00', '18:00:00', 'APPOINTMENT'),
+          -- 5: Sexta-feira
+          (NEW.id, 5, 1, '07:00:00', '18:00:00', 'APPOINTMENT'),
+          -- 6: Sábado
+          (NEW.id, 6, 1, '07:00:00', '18:00:00', 'APPOINTMENT'),
+          -- 7: Domingo
+          (NEW.id, 7, 1, '07:00:00', '12:00:00', 'APPOINTMENT');
+
+END$$
+
+DELIMITER ;
