@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface ProductRepository extends JpaRepository<Product, String> {
 
     @EntityGraph(attributePaths = {"category"})
@@ -19,4 +21,6 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     @Modifying
     @Query("UPDATE Product p SET p.isDeleted = true WHERE p.id = :id AND p.isDeleted = false")
     int softDeleteById(String id);
+
+    List<Product> findAllByIdIn(List<String> ids);
 }

@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.SQLRestriction;
 
 @Entity
+@Table(name = "service")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
