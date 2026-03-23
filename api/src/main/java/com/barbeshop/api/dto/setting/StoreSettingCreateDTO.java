@@ -1,7 +1,9 @@
 package com.barbeshop.api.dto.setting;
 
 import com.barbeshop.api.shared.utils.validation.Telephone;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import org.hibernate.validator.constraints.Length;
 
@@ -15,6 +17,11 @@ public record StoreSettingCreateDTO(
         @Telephone(message = "Invalid phone number format")
         String phone,
         String instagram,
-        Boolean productsEnabled
+        Boolean productsEnabled,
+        Boolean isAppointmentRestrictedWeekly,
+        @Min(value = 30, message = "Step schedules must be at least 30")
+        Integer stepSchedules,
+        @Min(value = 5, message = "Max appointments per day must be at least 5")
+        Integer pauseTolerance
 ) {
 }

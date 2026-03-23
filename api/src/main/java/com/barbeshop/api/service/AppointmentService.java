@@ -133,13 +133,15 @@ public class AppointmentService {
     }
 
     @Transactional
-    public void cancelAppointment(String appointmentId) {
+    public AppointmentSummaryResponseDTO cancelAppointment(String appointmentId) {
         boolean exists = appointmentRepository.existsById(appointmentId);
         if (!exists)
             throw new EntityNotFoundException("Appointment", appointmentId);
 
         if (appointmentRepository.cancelAppointmentById(appointmentId) <= 0)
             throw new IllegalStateException("Failed to cancel the appointment. It may have already been canceled");
+
+        return getAppointmentById(appointmentId);
     }
 
     @Transactional

@@ -3,8 +3,6 @@ package com.barbeshop.api.shared.utils;
 
 import com.barbeshop.api.dto.appointment.AppointmentCreateDTO;
 import com.barbeshop.api.dto.appointment.AppointmentSummaryResponseDTO;
-import com.barbeshop.api.dto.product.ProductSummaryDTO;
-import com.barbeshop.api.dto.serviceItem.ServiceItemSummaryDTO;
 import com.barbeshop.api.model.Appointment;
 import com.barbeshop.api.model.AppointmentProduct;
 import com.barbeshop.api.model.AppointmentServiceItem;
@@ -13,8 +11,6 @@ import com.barbeshop.api.model.enums.AppointmentStatus;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class AppointmentConverter {

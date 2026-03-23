@@ -9,5 +9,8 @@ public record StoreSettingResponseDTO(
         String address,
         String phone,
         String instagram,
-        Boolean productsEnabled) {
+        Boolean productsEnabled,
+        Boolean isAppointmentsWeekly,
+        Integer stepSchedule,
+        Integer pauseTolerance) {
 }

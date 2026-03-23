@@ -63,17 +63,13 @@ public class AppointmentController {
     }
 
     @PutMapping("/{id}/cancel")
-    public ResponseEntity<Void> cancelAppointment(
-            @PathVariable String id) {
-        appointmentService.cancelAppointment(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<AppointmentSummaryResponseDTO> cancelAppointment(@PathVariable String id) {
+        return ResponseEntity.ok(appointmentService.cancelAppointment(id));
     }
 
     @PutMapping("/{id}/accept")
-    public ResponseEntity<Void> acceptAppointment(
-            @PathVariable String id) {
+    public ResponseEntity<AppointmentSummaryResponseDTO> acceptAppointment(@PathVariable String id) {
         appointmentService.acceptAppointment(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(appointmentService.cancelAppointment(id));
     }
 }
-

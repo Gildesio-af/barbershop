@@ -5,8 +5,6 @@ import com.barbeshop.api.dto.schedule.BusinessHourUpdateDTO;
 import com.barbeshop.api.model.BusinessHour;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
-
 @Component
 public class BusinessHourConverter {
     public static BusinessHourResponseDTO modelToDTO(BusinessHour businessHour) {
