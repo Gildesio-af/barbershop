@@ -16,6 +16,8 @@ public class StoreSetting {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer id;
+    private Integer stepSchedule;
+    private Integer pauseTolerance;
     @Column(name = "store_name", nullable = false, length = 100)
     private String name;
     @Column(length = 150)
@@ -26,4 +28,7 @@ public class StoreSetting {
     private String instagram;
     @Column(name = "show_products_publicly")
     private Boolean productsEnabled;
+    @Column(name = "restrict_to_current_week")
+    private Boolean isAppointmentsWeekly;
+
 }

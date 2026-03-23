@@ -1,7 +1,7 @@
 package com.barbeshop.api.dto.appointment;
 
 import com.barbeshop.api.dto.product.ProductResponseDTO;
-import com.barbeshop.api.dto.service.ServiceItemResponseDTO;
+import com.barbeshop.api.dto.serviceItem.ServiceItemResponseDTO;
 import com.barbeshop.api.model.enums.AppointmentStatus;
 import lombok.Builder;
 

@@ -13,7 +13,7 @@ import org.hibernate.annotations.SQLRestriction;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
-@SQLRestriction("is_active = false")
+@SQLRestriction("is_active = true")
 public class ServiceItem {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

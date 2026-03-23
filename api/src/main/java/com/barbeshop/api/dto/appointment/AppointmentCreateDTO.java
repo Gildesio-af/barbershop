@@ -1,5 +1,7 @@
 package com.barbeshop.api.dto.appointment;
 
+import com.barbeshop.api.dto.product.ProductRequestOrderDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
@@ -11,7 +13,8 @@ import java.util.List;
 public record AppointmentCreateDTO(
         @NotEmpty(message = "Should have at least one service")
         List<@NotBlank(message = "Services ids must not be empty") String> serviceIds,
-        List<@NotBlank(message = "Products ids must not be empty") String> productsIds,
+        List<ProductRequestOrderDTO> products,
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
         LocalDateTime appointmentDate
 ) {
 }

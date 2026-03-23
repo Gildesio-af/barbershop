@@ -3,6 +3,7 @@ package com.barbeshop.api.shared.utils;
 import com.barbeshop.api.dto.category.CategoryResponseDTO;
 import com.barbeshop.api.dto.product.ProductCreateDTO;
 import com.barbeshop.api.dto.product.ProductResponseDTO;
+import com.barbeshop.api.dto.product.ProductSummaryDTO;
 import com.barbeshop.api.dto.product.ProductUpdateDTO;
 import com.barbeshop.api.model.Category;
 import com.barbeshop.api.model.Product;
@@ -56,5 +57,14 @@ public class ProductConverter {
                     .build());
         if(updateDTO.imageUrl() != null && !updateDTO.imageUrl().isBlank()) product.setImageUrl(updateDTO.imageUrl());
         if(updateDTO.isVisible() != null) product.setVisible(updateDTO.isVisible());
+    }
+
+    public static ProductSummaryDTO toSummaryDTO(Product product) {
+        return ProductSummaryDTO.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .price(product.getPrice())
+                .imageUrl(product.getImageUrl())
+                .build();
     }
 }

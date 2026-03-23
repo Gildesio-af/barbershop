@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -24,14 +26,19 @@ public class Appointment {
     private Double price;
     @Column(name = "total_duration")
     private Integer durationMinutes;
-    @Column(name = "app_status", columnDefinition = "DEFAULT 'PENDING'")
-    private AppointmentStatus status;
+    @Column(name = "app_status")
+    @Enumerated(EnumType.STRING)
+    private AppointmentStatus status = AppointmentStatus.PENDING;
     @Column(columnDefinition = "DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User customer;
-    // virus
 
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL,orphanRemoval = true)
+    private Set<AppointmentServiceItem> services = new HashSet<>();
+
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AppointmentProduct> products = new HashSet<>();
 }

@@ -1,8 +1,8 @@
 package com.barbeshop.api.service;
 
-import com.barbeshop.api.dto.service.ServiceItemCreateDTO;
-import com.barbeshop.api.dto.service.ServiceItemResponseDTO;
-import com.barbeshop.api.dto.service.ServiceItemUpdateDTO;
+import com.barbeshop.api.dto.serviceItem.ServiceItemCreateDTO;
+import com.barbeshop.api.dto.serviceItem.ServiceItemResponseDTO;
+import com.barbeshop.api.dto.serviceItem.ServiceItemUpdateDTO;
 import com.barbeshop.api.model.ServiceItem;
 import com.barbeshop.api.model.enums.ServiceType;
 import com.barbeshop.api.repository.ServiceItemRepository;
