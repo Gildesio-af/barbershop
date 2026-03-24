@@ -6,13 +6,14 @@ import lombok.*;
 import org.hibernate.annotations.SQLRestriction;
 
 @Entity
+@Table(name = "service")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
-@SQLRestriction("is_active = false")
+@SQLRestriction("is_active = true")
 public class ServiceItem {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

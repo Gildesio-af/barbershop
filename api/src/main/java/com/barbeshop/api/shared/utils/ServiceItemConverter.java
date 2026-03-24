@@ -1,8 +1,9 @@
 package com.barbeshop.api.shared.utils;
 
-import com.barbeshop.api.dto.service.ServiceItemCreateDTO;
-import com.barbeshop.api.dto.service.ServiceItemResponseDTO;
-import com.barbeshop.api.dto.service.ServiceItemUpdateDTO;
+import com.barbeshop.api.dto.serviceItem.ServiceItemCreateDTO;
+import com.barbeshop.api.dto.serviceItem.ServiceItemResponseDTO;
+import com.barbeshop.api.dto.serviceItem.ServiceItemSummaryDTO;
+import com.barbeshop.api.dto.serviceItem.ServiceItemUpdateDTO;
 import com.barbeshop.api.model.ServiceItem;
 import org.springframework.stereotype.Component;
 
@@ -38,5 +39,15 @@ public class ServiceItemConverter {
         if(updateDTO.price() != null) service.setPrice(updateDTO.price());
         if(updateDTO.imageUrl() != null) service.setImageUrl(updateDTO.imageUrl());
         if(updateDTO.isVisible() != null) service.setVisible(updateDTO.isVisible());
+    }
+
+    public static ServiceItemSummaryDTO toSummaryDTO(ServiceItem service) {
+        return ServiceItemSummaryDTO.builder()
+                .id(service.getId())
+                .name(service.getName())
+                .type(service.getType())
+                .price(service.getPrice())
+                .imageUrl(service.getImageUrl())
+                .build();
     }
 }

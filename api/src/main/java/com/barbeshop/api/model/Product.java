@@ -11,7 +11,7 @@ import org.hibernate.annotations.SQLRestriction;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
-@SQLRestriction("is_active = false")
+@SQLRestriction("is_active = true")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -28,7 +28,7 @@ public class Product {
     private String imageUrl;
     private boolean isVisible = true;
     @Column(name = "is_active")
-    private boolean isDeleted = false;
+    private boolean isActive = true;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)

@@ -1,4 +1,4 @@
-package com.barbeshop.api.dto.service;
+package com.barbeshop.api.dto.serviceItem;
 
 import com.barbeshop.api.model.enums.ServiceType;
 import jakarta.validation.constraints.Positive;

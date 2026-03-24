@@ -1,0 +1,1 @@
+ALTER TABLE store_settings ADD COLUMN restrict_to_current_week TINYINT(1) DEFAULT 0;
